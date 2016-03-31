@@ -3,7 +3,11 @@ var router = express.Router();
 var controller = require('./../controllers/discussion');
 
 router.get('/', controller.getAll);
-    
+
+router.get('/', function(req, res) {
+    res.json({ message: 'hooray! welcome to our api!' });
+});
+
 router.get('/:id', function(req, res){
     res.send("GET discussion with id " + req.params.id);
 });

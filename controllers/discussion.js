@@ -12,7 +12,7 @@ function create(req, res){
     var m = new Discussion();
     m.user = req.body.user;
     m.discussion = req.body.discussion;
-    
+
     m.save(function (err, discussion) {
         if (err) return console.error(err);
         res.send(discussion);

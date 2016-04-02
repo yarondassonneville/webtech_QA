@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var discussionSchema = mongoose.Schema({
     user: String,
-    discussion: String
+    topic: String
 });
 
 var Discussion = mongoose.model('Discussion', discussionSchema);

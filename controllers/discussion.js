@@ -11,15 +11,14 @@ module.exports.getAll = getAll;
 
 function create(req, res){
 
-    // console.log(req.body.newDiscussion); // returns undefined :(
-    var discussion = new Discussion({ user: 'Hardcoded result' });
+    var discussion = new Discussion({ topic: req.body.newDiscussion });
     discussion.save(function (err, discussion) {
     if (err) return console.error(err);
-    console.log('succes! saved user ' + discussion.user);
+    console.log('succes! new discussion topic ' + discussion.topic);
     });
 
 
-    res.render('discussion', {date: new Date().toDateString(), newDiscussion: discussion.user});
+    res.render('discussion', {date: new Date().toDateString(), topic: discussion.topic});
 
 };
 

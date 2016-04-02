@@ -1,9 +1,9 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var jade = require('jade');
 
-//mongoose.connect('mongodb://localhost/qanda');
+mongoose.connect('mongodb://localhost/qanda');
 
 var app = express();
 

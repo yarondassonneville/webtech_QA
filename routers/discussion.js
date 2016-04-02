@@ -2,17 +2,14 @@ var express = require('express');
 var router = express.Router();
 var controller = require('./../controllers/discussion');
 
+// Mag maar 1 get/put/delete/etc afgaan denk ik
 router.get('/', controller.getAll);
-
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });
-});
 
 router.get('/:id', function(req, res){
     res.send("GET discussion with id " + req.params.id);
 });
 
-router.post('/create', controller.create);
+router.post('/', controller.create);
 
 router.put('/:id', function(req, res){
     res.send("PUT discussion with id " + req.params.id);

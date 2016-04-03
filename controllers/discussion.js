@@ -1,22 +1,30 @@
 var Discussion = require('./../models/discussion');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 function getAll(req, res){
-    Discussion.find(function(err, messages){
-        res.send(Discussion);
+    var allDiscussions;
+    Discussion.find(function(err, discussions){
+        if (err) return console.error(err);
+        allDiscussions = discussions;
+        return res.render('discussion', {
+            date: new Date().toDateString(),
+            allDiscussions: allDiscussions
+          });
     });
 };
 
 module.exports.getAll = getAll;
 
 function create(req, res){
-    var m = new Discussion();
-    m.user = req.body.user;
-    m.discussion = req.body.discussion;
-    
-    m.save(function (err, discussion) {
-        if (err) return console.error(err);
-        res.send(discussion);
+
+    var discussion = new Discussion({ topic: req.body.newDiscussion });
+    discussion.save(function (err, discussion) {
+    if (err) return console.error(err);
+    console.log('succes! new discussion topic ' + discussion.topic);
     });
+
+    getAll(req, res);
 };
 
 module.exports.create = create;

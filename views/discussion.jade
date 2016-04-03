@@ -6,7 +6,7 @@ html
     h2= date
     form(method="post", action="")
       label(for="newDiscussion") New Discussion
-      input(type="text", name="newDiscussion", value="dummy")
+      input(type="text", name="newDiscussion", placeholder="Name of discussion")
     ul
       for discussion in allDiscussions  
         h1 #{discussion.topic}

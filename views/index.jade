@@ -3,3 +3,9 @@ html
     title= title
   body
     h1= discussion
+    form(method="post", action="/discussion")
+      label(for="username") Username
+      input(type="text", name="username", placeholder="Username")
+      label(for="password") Username
+      input(type="password", name="password", placeholder="Password")
+      input(type="submit", name="btnSend", value="Log in")

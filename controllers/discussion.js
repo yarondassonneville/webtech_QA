@@ -3,8 +3,15 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 function getAll(req, res){
-    res.render( 'discussion', { date: new Date().toDateString() } );
-
+    var allDiscussions;
+    Discussion.find(function(err, discussions){
+        if (err) return console.error(err);
+        allDiscussions = discussions;
+        return res.render('discussion', {
+            date: new Date().toDateString(),
+            allDiscussions: allDiscussions
+          });
+    });
 };
 
 module.exports.getAll = getAll;
@@ -17,9 +24,7 @@ function create(req, res){
     console.log('succes! new discussion topic ' + discussion.topic);
     });
 
-
-    res.render('discussion', {date: new Date().toDateString(), topic: discussion.topic});
-
+    getAll(req, res);
 };
 
 module.exports.create = create;

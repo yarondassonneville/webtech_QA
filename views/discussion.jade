@@ -7,4 +7,6 @@ html
     form(method="post", action="")
       label(for="newDiscussion") New Discussion
       input(type="text", name="newDiscussion", value="dummy")
-    h1= newDiscussion
+    ul
+      for discussion in allDiscussions  
+        h1 #{discussion.topic}

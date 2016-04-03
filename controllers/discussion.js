@@ -18,7 +18,7 @@ module.exports.getAll = getAll;
 
 function create(req, res){
 
-    var discussion = new Discussion({ topic: req.body.newDiscussion });
+    var discussion = new Discussion({ topic: req.body.newDiscussion, user: req.body.userNameField });
     discussion.save(function (err, discussion) {
     if (err) return console.error(err);
     console.log('succes! new discussion topic ' + discussion.topic);

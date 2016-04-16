@@ -7,6 +7,9 @@ function create(req, res){
     user.save(function (err, user) {
     if (err) return console.error(err);
         console.log('succes! new user was made: ' + user.user);
+        res.statusCode = 300;
+                res.setHeader("Location", "/discussion");                        
+                res.end();
     });
 };
 
@@ -17,7 +20,6 @@ function login(req, res){
     User.find({ user: req.body.usernameLog, password: req.body.passwordLog }, function(err, user) {
 
         if (err) {
-
             console.log('Signin error');
             return done(err);
         }
@@ -25,14 +27,17 @@ function login(req, res){
         //if user found.
         if (user.length!=0) {
           if(user[0].user && user[0].password){
-            console.log('Username already exists, username: ' + username);                         
+                console.log('test');
+                return res.redirect('/discussion');
              }else{
-                console.log('EMAIL already exists, email: ' + password);      
+                console.log("Username / Password doesn't match");      
              }                                    
              var err = new Error();
             err.status = 310;
-            return done(err);
-
+        } else {
+            console.log("Can't login");
+            return res.redirect('/');
+            
         }
 });
               };

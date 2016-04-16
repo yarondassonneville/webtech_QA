@@ -7,9 +7,7 @@ function create(req, res){
     user.save(function (err, user) {
     if (err) return console.error(err);
         console.log('succes! new user was made: ' + user.user);
-        res.statusCode = 300;
-                res.setHeader("Location", "/discussion");                        
-                res.end();
+        return res.redirect('/discussion');
     });
 };
 

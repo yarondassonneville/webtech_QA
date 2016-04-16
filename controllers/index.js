@@ -4,11 +4,33 @@ var bodyParser = require('body-parser');
 
 function create(req, res){
     var user = new User({ user: req.body.username, password: req.body.password });
-    user.save(function (err, user) {
+    User.find({ user: req.body.username, password: req.body.password }, function(err, user) {
+
+        if (err) {
+            console.log('Signup error');
+            return done(err);
+        }
+
+        //if user found.
+        if (user.length!=0) {
+          if(user[0].user){
+                console.log('User already exists');
+                return res.redirect('/');
+             }else{
+                console.log("ERROR");      
+             }                                    
+             var err = new Error();
+            err.status = 310;
+        } else {
+            var user = new User({ user: req.body.username, password: req.body.password });
+            user.save(function (err, user) {
     if (err) return console.error(err);
         console.log('succes! new user was made: ' + user.user);
         return res.redirect('/discussion');
     });
+        }
+});
+    
 };
 
 module.exports.create = create;

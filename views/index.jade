@@ -1,8 +1,9 @@
 html
   head
-    title= title
+    title IMD's Q&A App
   body
-    h1= register
+    h1.title IMD's Q&A App
+    h2= register
     form(name = "register", method="post", action="/signup")
       label(for="username") Username
       input(type="text", name="username", placeholder="Username")
@@ -11,7 +12,7 @@ html
       input(type="password", name="password", placeholder="Password")
       br
       input(type="submit", name="btnRegister", value="Registreer")
-    h1= 'Log in'
+    h2= 'Log in'
     form(name = "login", method="post", action="")
       label(for="usernameLog") Username
       input(type="text", name="usernameLog", placeholder="Username")

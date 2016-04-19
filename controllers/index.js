@@ -2,6 +2,18 @@ var User = require('./../models/index');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passwordHash = require('password-hash');
+var sessionStorage = require('sessionstorage');
+var session = require('express-session');
+var express = require("express");
+
+var app = express();
+
+app.use(session({
+  secret: 'keyboard cat', 
+  cookie: { maxAge: 60000 },
+  resave: false,
+  saveUninitialized: false
+}));
 
 function create(req, res){
     var hashPassword =  passwordHash.generate(req.body.password);
@@ -30,6 +42,8 @@ function create(req, res){
             user.save(function (err, user) {
     if (err) return console.error(err);
         console.log('succes! new user was made: ' + user.user);
+                var sess = session;
+                  sess.user = user[0]._id;
         return res.redirect('/discussion');
     });
         }
@@ -51,7 +65,14 @@ function login(req, res){
         //if user found.
         if (user.length!=0) {
           if(user[0].user /*&& user[0].password*/){
-              if(passwordHash.verify(req.body.passwordLog, user[0].password)){
+              if(passwordHash.verify(req.body.passwordLog, user[0].password)){   
+                  session.loggedin = "true";
+                  console.log(session.loggedin);
+                  var sess = session;
+                  sess.user = user[0]._id;
+    if (sess.user) {
+        console.log("yesssss");
+    }
                   return res.redirect('/discussion');
               }
               else {

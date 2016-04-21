@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
 var controller = require('./../controllers/discussion');
 var session = require('express-session');
 var express = require("express");
@@ -25,13 +26,22 @@ router.get('/', function(req, res){
     }
 });
 
-router.get('/all', controller.getAll);
+router.get('/all', function(req, res){
+    var sess = session;
+    if (sess.user) { 
+        console.log("Logged in");
+        controller.getAll(req, res);
+    } else {
+      console.log("IT isn't working");
+        res.redirect("/");
+    }
+});
 
 router.get('/:id', function(req, res){
     res.send("GET discussion with id " + req.params.id);
 });
 
-router.post('/', controller.create);
+router.post('/all', controller.create);
 
 router.put('/:id', function(req, res){
     res.send("PUT discussion with id " + req.params.id);

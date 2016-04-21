@@ -42,9 +42,12 @@ function create(req, res){
             user.save(function (err, user) {
     if (err) return console.error(err);
         console.log('succes! new user was made: ' + user.user);
-                var sess = session;
-                  sess.user = user[0]._id;
-        return res.redirect('/discussion');
+                User.find({ user: user.user }, function(err, user) {
+                    var sess = session;
+                    sess.user = user[0]._id;
+                    return res.redirect('/discussion');
+                });
+                
     });
         }
 });

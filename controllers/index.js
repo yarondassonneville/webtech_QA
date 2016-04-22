@@ -9,7 +9,7 @@ var express = require("express");
 var app = express();
 
 app.use(session({
-  secret: 'keyboard cat', 
+  secret: 'keyboard cat',
   cookie: { maxAge: 60000 },
   resave: false,
   saveUninitialized: false
@@ -18,7 +18,7 @@ app.use(session({
 function create(req, res){
     var hashPassword =  passwordHash.generate(req.body.password);
     console.log(hashPassword);
-    
+
     var user = new User({ user: req.body.username, password: hashPassword });
     User.find({ user: req.body.username, password: hashPassword }, function(err, user) {
 
@@ -33,25 +33,23 @@ function create(req, res){
                 console.log('User already exists');
                 return res.redirect('/');
              }else{
-                console.log("ERROR");      
-             }                                    
+                console.log("ERROR");
+             }
              var err = new Error();
             err.status = 310;
         } else {
             var user = new User({ user: req.body.username, password: hashPassword });
             user.save(function (err, user) {
-    if (err) return console.error(err);
-        console.log('succes! new user was made: ' + user.user);
-                User.find({ user: user.user }, function(err, user) {
-                    var sess = session;
-                    sess.user = user[0]._id;
-                    return res.redirect('/discussion');
-                });
-                
-    });
+              if (err) return console.error(err);
+              console.log('succes! new user was made: ' + user.userID);
+            User.find({ user: user.user }, function(err, user) {
+                var sess = session;
+                sess.userID = user[0]._id;
+                return res.redirect('/discussion');
+            });
+            });
         }
 });
-    
 };
 
 module.exports.create = create;
@@ -68,13 +66,15 @@ function login(req, res){
         //if user found.
         if (user.length!=0) {
           if(user[0].user /*&& user[0].password*/){
-              if(passwordHash.verify(req.body.passwordLog, user[0].password)){   
+              if(passwordHash.verify(req.body.passwordLog, user[0].password)){
                   session.loggedin = "true";
-                  console.log(session.loggedin);
+                  console.log("session.loggedin = " + session.loggedin);
                   var sess = session;
-                  sess.user = user[0]._id;
-    if (sess.user) {
-        console.log("yesssss");
+                  sess.userID = user[0]._id;
+                  sess.userName = req.body.usernameLog;
+    if (sess.userID) {
+        console.log("sess.userID exists ?");
+        console.log("logged in user = " + sess.userID);
     }
                   return res.redirect('/discussion');
               }
@@ -82,16 +82,16 @@ function login(req, res){
                   console.log("Password isn't correct");
               }
              }else{
-                console.log("Username / Password doesn't match");      
-             }                                    
+                console.log("Username / Password doesn't match");
+             }
              var err = new Error();
             err.status = 310;
         } else {
             console.log("Can't login");
             return res.redirect('/');
-            
+
         }
-});
-              };
+      });
+};
 
 module.exports.login = login;

@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 
 var discussionSchema = mongoose.Schema({
-    user: String,
+    userID: String,
+    userName: String,
     topic: String
 });
 

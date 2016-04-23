@@ -58,6 +58,8 @@ router.get('/:topic', function(req, res){
 
 router.post('/all', controller.create);
 
+router.post('/create', controller.create);
+
 router.put('/:id', function(req, res){
     res.send("PUT discussion with id " + req.params.id);
 });

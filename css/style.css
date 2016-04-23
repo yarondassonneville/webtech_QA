@@ -1,0 +1,77 @@
+html {
+  font-family: "Open Sans", "Arial", sans-serif; }
+
+input[type="submit"] {
+  background-color: #C20F29;
+  color: white;
+  padding: 10px;
+  font-size: 1.1em;
+  border: 0 none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+
+.title {
+  width: 100%;
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 20px 0px;
+  text-align: center;
+  -webkit-box-shadow: 0px 1px 4px 0px #4d4d4d;
+  -moz-box-shadow: 0px 1px 4px 0px #4d4d4d;
+  box-shadow: 0px 1px 4px 0px #4d4d4d; }
+
+.imageBack {
+  background-image: url(https://images.unsplash.com/photo-1458891216473-4f26bb4eb40e?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450);
+  background-size: cover; }
+
+.myContainer {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 80vh; }
+
+#container {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; }
+
+#container > form {
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 4px; }
+
+#container > form > h2 {
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.2em; }
+
+#container > form > label {
+  display: block;
+  margin-bottom: 5px; }
+
+#container > form > input {
+  padding: 10px 5px;
+  font-size: 1.1em;
+  margin-bottom: 5px; }
+
+#container > form > input[type=submit] {
+  width: 100%; }
+
+@media screen and (max-width: 500px) {
+  #container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+
+  .myContainer {
+    display: flex; } }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,23 +1,30 @@
 html
   head
     title IMD's Q&A App
-  body
+    style
+      include ../css/reset.css
+      include ../css/style.css
+  body.imageBack
     h1.title IMD's Q&A App
-    h2= register
-    form(name = "register", method="post", action="/signup")
-      label(for="username") Username
-      input(type="text", name="username", placeholder="Username")
-      br
-      label(for="password") Password
-      input(type="password", name="password", placeholder="Password")
-      br
-      input(type="submit", name="btnRegister", value="Registreer")
-    h2= 'Log in'
-    form(name = "login", method="post", action="")
-      label(for="usernameLog") Username
-      input(type="text", name="usernameLog", placeholder="Username")
-      br
-      label(for="passwordLog") Password
-      input(type="password", name="passwordLog", placeholder="Password")
-      br
-      input(type="submit", name="btnLogin", value="Log in")
+    .myContainer
+      #container.col
+        form(name = "register", method="post", action="/signup")
+          h2= "Register"
+          br
+          label(for="username") Username
+          input(type="text", name="username", placeholder="Username")
+          br
+          label(for="password") Password
+          input(type="password", name="password", placeholder="Password")
+          br
+          input(type="submit", name="btnRegister", value="Registreer")
+        form(name = "login", method="post", action="")
+          h2= 'Log in'
+          br
+          label(for="usernameLog") Username
+          input(type="text", name="usernameLog", placeholder="Username")
+          br
+          label(for="passwordLog") Password
+          input(type="password", name="passwordLog", placeholder="Password")
+          br
+          input(type="submit", name="btnLogin", value="Log in")

@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-
 function getAll(req, res){
     var allDiscussions;
     Discussion.find(function(err, discussions){

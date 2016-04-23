@@ -30,12 +30,14 @@ function create(req, res){
 
 module.exports.create = create;
 
-function getDiscussion(req, res, pTopic){
-    Discussion.findOne({'topic': pTopic}, 'user topic _id', function (err, discussion) {
+function getDiscussion(req, res, pID, callback){
+    var discussionTopic = "";
+    Discussion.findOne({'_id': pID}, 'userName topic _id', function (err, discussion) {
         if (err) return handleError(err);
-        console.log('user %s maakte de topic -> %s aan. ID = %s', discussion.user, discussion.topic, discussion._id);
-        // Space Ghost is a talk show host.)
+        console.log('user %s maakte de topic -> %s aan. ID = %s', discussion.userName, discussion.topic, discussion._id);
+        callback(discussion);
     });
+
 };
 
 

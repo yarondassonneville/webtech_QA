@@ -57,12 +57,7 @@ router.get('/:id', function(req, res){
   var sess = session;
   if (sess.userID) {
     console.log(sessOK);
-    controller.getDiscussion(req, res, req.params.id, function(callback){
-      res.render('discussion/QandA', {
-        topic: callback.topic
-        // allQandAs: callback.qandas
-      });
-    });
+    controller.getDiscussion(req, res, req.params.id);
   } else {
   console.log(sessFail);
   res.redirect("/");

@@ -16,7 +16,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// Mag maar 1 get/put/delete/etc afgaan denk ik
+// logged in user? -> redirect
 router.get('/', function(req, res){
   var sess = session;
   if (sess.userID) {
@@ -28,6 +28,7 @@ router.get('/', function(req, res){
   }
 });
 
+// logged in user? -> get all discussions
 router.get('/all', function(req, res){
   var sess = session;
   if (sess.userID) {
@@ -39,13 +40,14 @@ router.get('/all', function(req, res){
   }
 });
 
+// render de create a new discussion pagina
 router.get('/create', function(req, res){
   var sess = session;
   if (sess.userID) {
     console.log(sessOK);
-    return res.render('discussion/createDiscussion', {
+    return res.render('discussion/create', {
       date: new Date().toDateString(),
-      // allDiscussions: allDiscussions
+      allDiscussions: allDiscussions
     });
   } else {
     console.log(sessFail);
@@ -53,6 +55,7 @@ router.get('/create', function(req, res){
   }
 });
 
+// get an individual discussion
 router.get('/:id', function(req, res){
   var sess = session;
   if (sess.userID) {
@@ -60,7 +63,6 @@ router.get('/:id', function(req, res){
     controller.getDiscussion(req, res, req.params.id, function(callback){
       res.render('discussion/QandA', {
         topic: callback.topic
-        // allQandAs: callback.qandas
       });
     });
   } else {
@@ -69,13 +71,16 @@ router.get('/:id', function(req, res){
   }
 });
 
-router.post('/all', controller.createDiscussion);
+// post a new question to the discussion
+router.post('/:id', function(req, res){});
 
-router.post('/*', controller.addQuestion);
+
+router.post('/all', controller.create);
+
 
 // TODO: POST -> AJAX call
 
-router.post('/create', controller.createDiscussion);
+router.post('/create', controller.create);
 
 
 module.exports = router;

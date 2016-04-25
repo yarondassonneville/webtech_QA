@@ -1,4 +1,4 @@
-var User = require('./../models/index');
+var User = require('./../models/user');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passwordHash = require('password-hash');

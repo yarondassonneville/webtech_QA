@@ -1,18 +1,19 @@
 var mongoose = require('mongoose');
 
-var answerSchema = mongoose.Schema({
-    userID: String,
-    topicID: String,
-    userName: String,
-    answer: String
-});
-
 var QandASchema = mongoose.Schema({
+    topicID: String,
     userID: String,
     userName: String,
     question: String,
-    answers: [answerSchema]
+    answers: {
+        userID: String,
+        userName: String,
+        answer: String
+    },
+    activeUsers: {
+        userID: String
+    }
 });
 
-var QandASchema = mongoose.model('QandA', QandASchema);
+var QandA = mongoose.model('QandA', QandASchema);
 module.exports = QandA;

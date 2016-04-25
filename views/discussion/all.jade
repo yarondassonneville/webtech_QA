@@ -10,5 +10,5 @@ html
       input(type="test", name="userNameField", value="Yaron", hidden)
       input(type="submit", name="btnSubmit", value="Create")
     ul
-      for discussion in allDiscussions
+      each discussion in allDiscussions
         h1 #{discussion.topic}

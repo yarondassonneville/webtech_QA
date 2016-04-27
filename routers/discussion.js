@@ -57,16 +57,23 @@ router.get('/:id', function(req, res){
   var sess = session;
   if (sess.userID) {
     console.log(sessOK);
+    sess.myTopic = req.params.id;
     controller.getDiscussion(req, res, req.params.id);
   } else {
-  console.log(sessFail);
+  console.log("sessFail");
   res.redirect("/");
   }
 });
 
 router.post('/all', controller.createDiscussion);
 
-router.post('/*', controller.addQuestion);
+router.post('/answer', function(req, res){
+    controller.addAnswer(req, res);
+});
+
+router.post('/', function(req, res){
+    controller.addQuestion(req, res);
+});
 
 // TODO: POST -> AJAX call
 

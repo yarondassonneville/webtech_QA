@@ -2,13 +2,21 @@ html
   head
     title= topic
   body
+    a(href="/discussion/all") Ga terug naar alle discussies
     h1= topic
-    form(method="post", action="")
-      label(for="newQuestion") Ask a question
-      input(type="text", name="newQuestion", placeholder="Ask away!")
-      //input(type="submit", name="btnSubmit", value="Create")
+    form(method="post", action="/")
+      label(for="newQuestion") Stel hier je vraag
+      input(type="text", name="newQuestion", placeholder="Stel hier je vraag")
+      input(type="submit", name="btnSubmit", value="Vraag stellen")
     
-      h1= date
-      each qanda in allQandAs
-        h1 #{qanda.question}
+    h1= date
+    each qanda in allQandAs
+      h2 #{qanda.question}
+      each answer in qanda.answers
+        h3 #{answer.answer}
+      form(method="post", action="answer", name="answer")
+        label(for="answerQ") Answer the question
+        input(type="text", name="questionID", value="#{qanda._id}", hidden)
+        input(type="text", name="newAnswer", placeholder="Schrijf hier je comment")
+        input(type="submit", name="btnAnswer", value="Reageer")
         

@@ -11,4 +11,5 @@ html
       input(type="submit", name="btnSubmit", value="Create")
     ul
       each discussion in allDiscussions
-        h1 #{discussion.topic}
+        h1 
+          a(href="/discussion/#{discussion._id}") #{discussion.topic}

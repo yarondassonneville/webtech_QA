@@ -5,11 +5,11 @@ var QandASchema = mongoose.Schema({
     userID: String,
     userName: String,
     question: String,
-    answers: {
+    answers: [{
         userID: String,
         userName: String,
         answer: String
-    },
+    }],
     activeUsers: {
         userID: String
     }

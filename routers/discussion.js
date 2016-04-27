@@ -57,7 +57,8 @@ router.get('/:id', function(req, res){
   var sess = session;
   if (sess.userID) {
     console.log(sessOK);
-    sess.myTopic = req.params.id;
+    sess.getTopic = req.params.id;
+    console.log('sess.getTopic = ' + sess.getTopic);
     controller.getDiscussion(req, res, req.params.id);
   } else {
   console.log("sessFail");
@@ -71,7 +72,7 @@ router.post('/answer', function(req, res){
     controller.addAnswer(req, res);
 });
 
-router.post('/', function(req, res){
+router.post('/question', function(req, res){
     controller.addQuestion(req, res);
 });
 

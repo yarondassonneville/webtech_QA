@@ -7,7 +7,7 @@ var session = require('express-session');
 
 function createDiscussion(req, res){
     var sess = session;
-    
+
     var discussion = new Discussion({
         topic: req.body.newDiscussion,
         userID: sess.userID,
@@ -36,16 +36,17 @@ function getAllDiscussions(req, res){
 module.exports.getAllDiscussions = getAllDiscussions;
 
 
-function getDiscussion(req, res, pID, callback){
+function getDiscussion(req, res, pID){
     var jsonDiscussion = {};
     Discussion.findOne({'_id': pID}, 'userName topic _id', function (err, discussion) {
         if (err) return handleError(err);
         jsonDiscussion.discussion = discussion;
         console.log('user %s maakte de topic -> %s aan. ID = %s', discussion.userName, discussion.topic, discussion._id);
 
-        QandA.find(function(err, qandas){
+        // TODO: Filter hier voor de geselecteerde discussion
+        QandA.find( { 'topicID': pID }, function(err, qandas){
             if (err) return console.error(err);
-            console.log('getDiscussion qandas : ' + qandas);
+            // console.log('getDiscussion qandas : ' + qandas);
             jsonDiscussion.qandas = qandas;
             res.render('discussion/QandA', {
                 topic: jsonDiscussion.discussion.topic,
@@ -68,10 +69,12 @@ module.exports.getAllQandAs = getAllQandAs;
 
 
 function addQuestion(req, res){
+    // TODO: dit is naar de neuk
+
     var sess = session;
 
     var qanda = new QandA({
-        topicID: sess.myTopic,
+        topicID: sess.getTopic,
         userID: sess.userID,
         userName: sess.userName,
         question: req.body.newQuestion
@@ -79,16 +82,18 @@ function addQuestion(req, res){
 
     qanda.save(function (err, qanda) {
     if (err) return console.error(err);
-    console.log('succes! new question ' + qanda.question + 'for topic ');
+    console.log('succes! new question ' + qanda.question + 'for topic ' + sess.getTopic);
     });
 
-    //getAllQandAs(req, res, callback);
+    res.redirect('/discussion/' + sess.getTopic);
+
+
 };
 module.exports.addQuestion = addQuestion;
 
 function addAnswer(req, res){
     var sess = session;
-    
+
     QandA.findByIdAndUpdate(
     req.body.questionID,
     {$push: {"answers": {userID: sess.userID, userName: sess.userName ,answer: req.body.newAnswer}}},
@@ -97,7 +102,7 @@ function addAnswer(req, res){
         console.log(err);
     }
 );
-    console.log("/discussion/" + sess.myTopic);
-    res.redirect("/discussion/" + sess.myTopic);
+    console.log("added answer to /discussion/" + sess.getTopic);
+    res.redirect("/discussion/" + sess.getTopic);
 }
 module.exports.addAnswer = addAnswer;

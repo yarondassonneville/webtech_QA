@@ -7,7 +7,7 @@ var session = require('express-session');
 
 function createDiscussion(req, res){
     var sess = session;
-
+    
     var discussion = new Discussion({
         topic: req.body.newDiscussion,
         userID: sess.userID,
@@ -71,7 +71,7 @@ function addQuestion(req, res){
     var sess = session;
 
     var qanda = new QandA({
-        topicID: req.params.id,
+        topicID: sess.myTopic,
         userID: sess.userID,
         userName: sess.userName,
         question: req.body.newQuestion
@@ -85,3 +85,19 @@ function addQuestion(req, res){
     //getAllQandAs(req, res, callback);
 };
 module.exports.addQuestion = addQuestion;
+
+function addAnswer(req, res){
+    var sess = session;
+    
+    QandA.findByIdAndUpdate(
+    req.body.questionID,
+    {$push: {"answers": {userID: sess.userID, userName: sess.userName ,answer: req.body.newAnswer}}},
+    {safe: true, upsert: true},
+    function(err, model) {
+        console.log(err);
+    }
+);
+    console.log("/discussion/" + sess.myTopic);
+    res.redirect("/discussion/" + sess.myTopic);
+}
+module.exports.addAnswer = addAnswer;

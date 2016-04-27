@@ -18,5 +18,11 @@
     "nodemon": "^1.9.1",
     "password-hash": "^1.2.2",
     "sessionstorage": "0.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.6",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-imagemin": "^2.4.0"
   }
 }

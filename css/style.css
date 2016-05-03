@@ -73,5 +73,15 @@ input[type="submit"] {
 
   .myContainer {
     display: flex; } }
+header {
+  width: 100%;
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 20px 0px;
+  text-align: center;
+  -webkit-box-shadow: 0px 1px 4px 0px #4d4d4d;
+  -moz-box-shadow: 0px 1px 4px 0px #4d4d4d;
+  box-shadow: 0px 1px 4px 0px #4d4d4d; }
 
 /*# sourceMappingURL=style.css.map */

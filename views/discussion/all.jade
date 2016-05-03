@@ -1,7 +1,12 @@
 html
   head
-    title= title
+    title 'IMD's Q&A App'
+    style
+      include ../../css/reset.css
+      include ../../css/style.css
   body
+    header.myHeader
+      h1= 'Live Q&A app'
     h1= topic
     h2= date
     form(method="post", action="")
@@ -9,7 +14,7 @@ html
       input(type="text", name="newDiscussion", placeholder="Name of discussion")
       input(type="test", name="userNameField", value="Yaron", hidden)
       input(type="submit", name="btnSubmit", value="Create")
-    ul
+    ul#testje
       each discussion in allDiscussions
-        h1 
+        h1
           a(href="/discussion/#{discussion._id}") #{discussion.topic}

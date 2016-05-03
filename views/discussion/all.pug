@@ -12,6 +12,8 @@ html
       h1= 'Live Q&A app'
     h1= topic
     form(method="post", action="")
+      input(type="text", name="locLat", id="locLat", hidden, value="")
+      input(type="text", name="locLng", id="locLng", hidden, value="")
       label.newDis(for="newDiscussion") New Discussion 
       br
       input(type="text", name="newDiscussion", placeholder="Name of discussion")

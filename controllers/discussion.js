@@ -17,7 +17,7 @@ function createDiscussion(req, res){
     if (err) return console.error(err);
     console.log('succes! new discussion topic ' + discussion.topic);
     });
-
+    
     getAllDiscussions(req, res);
 };
 module.exports.createDiscussion = createDiscussion;
@@ -39,7 +39,9 @@ module.exports.getAllDiscussions = getAllDiscussions;
 function getDiscussion(req, res, pID){
     var jsonDiscussion = {};
     Discussion.findOne({'_id': pID}, 'userName topic _id', function (err, discussion) {
-        if (err) return handleError(err);
+        if(err){
+            console.log(err);
+        }
         jsonDiscussion.discussion = discussion;
         console.log('user %s maakte de topic -> %s aan. ID = %s', discussion.userName, discussion.topic, discussion._id);
 
@@ -84,7 +86,7 @@ function addQuestion(req, res){
     if (err) return console.error(err);
     console.log('succes! new question ' + qanda.question + 'for topic ' + sess.getTopic);
     });
-
+    
     res.redirect('/discussion/' + sess.getTopic);
 
 

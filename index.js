@@ -2,12 +2,12 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var multer = require("multer");
-var jade = require('jade');
+var pug = require('pug');
 
 mongoose.connect('mongodb://localhost/qanda');
 
 var app = express();
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded

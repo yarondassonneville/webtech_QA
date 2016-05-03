@@ -10,6 +10,9 @@ $(document).ready(function(){
     function showPosition(position) {
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
+        $("#locLat").val(position.coords.latitude);
+        $("#locLng").val(position.coords.longitude);
+        console.log(lat + " " + lng);
     }
     
     getLocation();

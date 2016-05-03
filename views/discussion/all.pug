@@ -4,17 +4,19 @@ html
     style
       include ../../css/reset.css
       include ../../css/style.css
+    script(src='https://code.jquery.com/jquery-2.2.3.min.js')
+    script
+      include ../../js/script.js
   body
     header.myHeader
       h1= 'Live Q&A app'
     h1= topic
-    h2= date
     form(method="post", action="")
-      label(for="newDiscussion") New Discussion
+      label.newDis(for="newDiscussion") New Discussion 
+      br
       input(type="text", name="newDiscussion", placeholder="Name of discussion")
       input(type="test", name="userNameField", value="Yaron", hidden)
       input(type="submit", name="btnSubmit", value="Create")
     ul#testje
       each discussion in allDiscussions
-        h1
-          a(href='/discussion/' + discussion._id) #{discussion.topic}
+        a(href='/discussion/' + discussion._id) #{discussion.topic}

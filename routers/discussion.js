@@ -69,6 +69,7 @@ router.get('/:id', function(req, res){
 router.post('/all', controller.createDiscussion);
 
 router.post('/answer', function(req, res){
+    console.log("Create my answer");
     controller.addAnswer(req, res);
 });
 

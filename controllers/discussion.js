@@ -75,7 +75,8 @@ function addQuestion(req, res){
 
     var sess = session;
 
-    var qanda = new QandA({
+    if(req.body.newQuestion){
+        var qanda = new QandA({
         topicID: sess.getTopic,
         userID: sess.userID,
         userName: sess.userName,
@@ -87,7 +88,11 @@ function addQuestion(req, res){
     console.log('succes! new question ' + qanda.question + 'for topic ' + sess.getTopic);
     });
     
-    res.redirect('/discussion/' + sess.getTopic);
+        res.redirect('/discussion/' + sess.getTopic);
+    } else {
+        res.redirect('/discussion/' + sess.getTopic);
+    }
+    
 
 
 };
@@ -96,7 +101,8 @@ module.exports.addQuestion = addQuestion;
 function addAnswer(req, res){
     var sess = session;
 
-    QandA.findByIdAndUpdate(
+    if(req.body.newAnswer){
+        QandA.findByIdAndUpdate(
     req.body.questionID,
     {$push: {"answers": {userID: sess.userID, userName: sess.userName ,answer: req.body.newAnswer}}},
     {safe: true, upsert: true},
@@ -106,5 +112,8 @@ function addAnswer(req, res){
 );
     console.log("added answer to /discussion/" + sess.getTopic);
     res.redirect("/discussion/" + sess.getTopic);
+    } else {
+res.redirect("/discussion/" + sess.getTopic);
+    }
 }
 module.exports.addAnswer = addAnswer;

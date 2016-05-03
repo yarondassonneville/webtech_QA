@@ -1,7 +1,12 @@
 html
   head
     title= topic
+    style
+      include ../../css/reset.css
+      include ../../css/style.css
   body
+    header.myHeader
+      h1= 'Live Q&A app'
     a(href="/discussion/all") Ga terug naar alle discussies
     h1= topic
     form(method="post", action="question")
@@ -11,12 +16,11 @@ html
     
     h1= date
     each qanda in allQandAs
-      h2 #{qanda.question}
+      h2.question #{qanda.question}
       each answer in qanda.answers
-        h3 #{answer.answer}
+        h3.answer #{answer.answer}
       form(method="post", action="answer", name="answer")
         label(for="answerQ") Answer the question
-        input(type="text", name="questionID", value="#{qanda._id}", hidden)
+        input(type="text", name= "questionID", hidden, value=qanda._id)
         input(type="text", name="newAnswer", placeholder="Schrijf hier je comment")
         input(type="submit", name="btnAnswer", value="Reageer")
-        

@@ -11,7 +11,9 @@ function createDiscussion(req, res){
     var discussion = new Discussion({
         topic: req.body.newDiscussion,
         userID: sess.userID,
-        userName: sess.userName
+        userName: sess.userName,
+        lat: req.body.locLat,
+        lng: req.body.locLng
     });
     discussion.save(function (err, discussion) {
     if (err) return console.error(err);

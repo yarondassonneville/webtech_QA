@@ -3,7 +3,9 @@ var mongoose = require('mongoose');
 var discussionSchema = mongoose.Schema({
     userID: String,
     userName: String,
-    topic: String
+    topic: String,
+    lat: String,
+    lng: String
 });
 
 var Discussion = mongoose.model('Discussion', discussionSchema);

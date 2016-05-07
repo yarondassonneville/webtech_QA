@@ -11,6 +11,45 @@ input[type="submit"] {
   -webkit-border-radius: 5px;
   border-radius: 5px; }
 
+.submit__answer {
+  background-color: #C20F29;
+  color: white;
+  padding: 5px !important;
+  font-size: 1.1em;
+  border: 0 none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-left: 5px; }
+
+.goBack {
+  background: #d1372c;
+  background-image: -webkit-linear-gradient(top, #d1372c, #ab1616);
+  background-image: -moz-linear-gradient(top, #d1372c, #ab1616);
+  background-image: -ms-linear-gradient(top, #d1372c, #ab1616);
+  background-image: -o-linear-gradient(top, #d1372c, #ab1616);
+  background-image: linear-gradient(to bottom, #d1372c, #ab1616);
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  display: block;
+  margin: 10px auto;
+  width: 300px;
+  text-align: center; }
+
+.goBack:hover {
+  background: #cc1212;
+  background-image: -webkit-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: -moz-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: -ms-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: -o-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: linear-gradient(to bottom, #cc1212, #a30c0c);
+  text-decoration: none; }
+
 .title {
   width: 100%;
   background-color: white;
@@ -35,9 +74,9 @@ input[type="submit"] {
 #testje a:hover {
   background-color: #ededed; }
 
-.newDis {
-  margin: 15px;
-  font-size: 1.5em; }
+.labelBig {
+  margin: 15px 15px 15px 0px;
+  font-size: 1.4em; }
 
 h2.question {
   font-size: 1.4em;
@@ -56,6 +95,11 @@ h3.answer:before {
   position: relative;
   bottom: .1em;
   color: #666; }
+
+h1.topicName {
+  margin: 10px;
+  font-size: 1.6em;
+  font-weight: bold; }
 
 .imageBack {
   background-image: url(https://images.unsplash.com/photo-1458891216473-4f26bb4eb40e?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450);
@@ -108,6 +152,37 @@ h3.answer:before {
 
   .myContainer {
     display: flex; } }
+.bigInput {
+  color: white;
+  padding: 10px;
+  font-size: 1.1em;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+
+#formNewDiscussion {
+  margin: 10px; }
+
+#btnCreateSubmit {
+  margin-left: 10px; }
+
+#formNewQuestion {
+  margin: 10px; }
+
+.labelBig__answer {
+  margin: 15px 15px 15px 15px;
+  font-size: 1.1em; }
+
+.bigInput__answer {
+  color: white;
+  padding: 5px;
+  font-size: 1em;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  width: 300px; }
+
+.inputLeft {
+  margin-left: 10px; }
+
 header {
   width: 100%;
   background-color: white;

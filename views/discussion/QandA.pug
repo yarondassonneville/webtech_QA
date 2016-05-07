@@ -7,12 +7,12 @@ html
   body
     header.myHeader
       h1= 'Live Q&A app'
-    a(href="/discussion/all") Ga terug naar alle discussies
-    h1= topic
-    form(method="post", action="question")
-      label(for="newQuestion") Stel hier je vraag
-      input(type="text", name="newQuestion", placeholder="Stel hier je vraag")
-      input(type="submit", name="btnSubmit", value="Vraag stellen")
+    a(href="/discussion/all", class="goBack") Ga terug naar alle discussies
+    h1.topicName= topic
+    form(method="post", action="question", id="formNewQuestion")
+      label(for="newQuestion", class="labelBig") Stel hier je vraag
+      input(type="text", name="newQuestion", placeholder="Stel hier je vraag", class="bigInput")
+      input(type="submit", name="btnSubmit", value="Vraag stellen", class="inputLeft")
     
     h1= date
     each qanda in allQandAs
@@ -20,7 +20,7 @@ html
       each answer in qanda.answers
         h3.answer #{answer.answer}
       form(method="post", action="answer", name="answer")
-        label(for="answerQ") Answer the question
+        label(for="answerQ", class="labelBig labelBig__answer") Answer the question
         input(type="text", name= "questionID", hidden, value=qanda._id)
-        input(type="text", name="newAnswer", placeholder="Schrijf hier je comment")
-        input(type="submit", name="btnAnswer", value="Reageer")
+        input(type="text", name="newAnswer", placeholder="Schrijf hier je comment", class="bigInput__answer")
+        input(type="submit", name="btnAnswer", value="Reageer", class="submit__answer")

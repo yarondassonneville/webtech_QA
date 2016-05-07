@@ -8,3 +8,45 @@ input[type="submit"] {
     -webkit-border-radius: 5px;
     border-radius: 5px; 
 }
+
+.submit__answer {
+    background-color:$shiraz;
+    color:$colorW;
+    padding:5px !important;
+    font-size:1.1em;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    margin-left:5px;
+}
+
+.goBack {
+    background: #d1372c;
+  background-image: -webkit-linear-gradient(top, #d1372c, #ab1616);
+  background-image: -moz-linear-gradient(top, #d1372c, #ab1616);
+  background-image: -ms-linear-gradient(top, #d1372c, #ab1616);
+  background-image: -o-linear-gradient(top, #d1372c, #ab1616);
+  background-image: linear-gradient(to bottom, #d1372c, #ab1616);
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+    display: block;
+    margin: 10px auto;
+    width: 300px;
+    text-align: center;
+}
+
+.goBack:hover {
+    background: #cc1212;
+  background-image: -webkit-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: -moz-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: -ms-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: -o-linear-gradient(top, #cc1212, #a30c0c);
+  background-image: linear-gradient(to bottom, #cc1212, #a30c0c);
+  text-decoration: none;
+}

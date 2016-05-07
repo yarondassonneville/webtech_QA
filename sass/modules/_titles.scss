@@ -25,9 +25,9 @@
    background-color:#ededed; 
 }
 
-.newDis {
-    margin:15px;
-    font-size:1.5em;
+.labelBig {
+    margin:15px 15px 15px 0px;
+    font-size:1.4em;
 }
 
 h2.question {
@@ -50,3 +50,9 @@ h3.answer:before {
     bottom: .1em;
     color: #666;
 }
+
+h1.topicName {
+    margin:10px;
+    font-size:1.6em;
+    font-weight:bold;
+} 

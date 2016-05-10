@@ -21,6 +21,6 @@ html
         h3.answer #{answer.answer}
       form(method="post", action="answer", name="answer")
         label(for="answerQ", class="labelBig labelBig__answer") Answer the question
-        input(type="text", name= "questionID", hidden, value=qanda._id)
+        input(type="text", name="questionID", hidden, value=qanda._id)
         input(type="text", name="newAnswer", placeholder="Schrijf hier je comment", class="bigInput__answer")
         input(type="submit", name="btnAnswer", value="Reageer", class="submit__answer")

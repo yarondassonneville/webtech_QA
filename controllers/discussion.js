@@ -45,6 +45,7 @@ function getDiscussion(req, res, pID){
             console.log(err);
         }
         jsonDiscussion.discussion = discussion;
+        console.log(discussion);
         console.log('user %s maakte de topic -> %s aan. ID = %s', discussion.userName, discussion.topic, discussion._id);
 
         // TODO: Filter hier voor de geselecteerde discussion
@@ -104,8 +105,9 @@ function addAnswer(req, res){
     var sess = session;
 
     if(req.body.newAnswer){
+        var path = req.body.questionID.replace(/"([^"]+(?="))"/g, '$1');
         QandA.findByIdAndUpdate(
-    req.body.questionID,
+    path,
     {$push: {"answers": {userID: sess.userID, userName: sess.userName ,answer: req.body.newAnswer}}},
     {safe: true, upsert: true},
     function(err, model) {

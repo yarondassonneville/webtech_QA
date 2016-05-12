@@ -19,8 +19,8 @@ function createDiscussion(req, res){
     if (err) return console.error(err);
     console.log('succes! new discussion topic ' + discussion.topic);
     });
-    
-    getAllDiscussions(req, res);
+    res.send('succes');
+    //getAllDiscussions(req, res);
 };
 module.exports.createDiscussion = createDiscussion;
 
@@ -74,8 +74,6 @@ module.exports.getAllQandAs = getAllQandAs;
 
 
 function addQuestion(req, res){
-    // TODO: dit is naar de neuk
-
     var sess = session;
 
     if(req.body.newQuestion){
@@ -90,13 +88,11 @@ function addQuestion(req, res){
     if (err) return console.error(err);
     console.log('succes! new question ' + qanda.question + 'for topic ' + sess.getTopic);
     });
-    
-        res.redirect('/discussion/' + sess.getTopic);
-    } else {
-        res.redirect('/discussion/' + sess.getTopic);
-    }
-    
 
+    res.redirect('/discussion/' + sess.getTopic);
+    } else {
+    res.redirect('/discussion/' + sess.getTopic);
+    }
 
 };
 module.exports.addQuestion = addQuestion;

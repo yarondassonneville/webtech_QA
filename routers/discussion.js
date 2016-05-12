@@ -66,7 +66,7 @@ router.get('/:id', function(req, res){
   }
 });
 
-router.post('/all', controller.createDiscussion);
+//router.post('/all', controller.createDiscussion);
 
 router.post('/answer', function(req, res){
     console.log("Create my answer");
@@ -76,10 +76,6 @@ router.post('/answer', function(req, res){
 router.post('/question', function(req, res){
     controller.addQuestion(req, res);
 });
-
-// TODO: POST -> AJAX call
-
-router.post('/create', controller.createDiscussion);
 
 
 module.exports = router;

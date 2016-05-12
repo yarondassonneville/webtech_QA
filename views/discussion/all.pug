@@ -5,8 +5,6 @@ html
       include ../../css/reset.css
       include ../../css/style.css
     script(src='https://code.jquery.com/jquery-2.2.3.min.js')
-    script
-      include ../../js/script.js
   body
     header.myHeader
       h1= 'Live Q&A app'
@@ -14,10 +12,13 @@ html
     form(method="post", action="", id="formNewDiscussion")
       input(type="text", name="locLat", id="locLat", hidden, value="")
       input(type="text", name="locLng", id="locLng", hidden, value="")
-      label.newDis(for="newDiscussion") New Discussion 
+      label.newDis(for="newDiscussion") New Discussion
       input(type="text", name="newDiscussion", placeholder="Name of discussion", id="newDiscussion", class="bigInput")
-      input(type="test", name="userNameField", value="Yaron", hidden)
+      input(type="test", name="userNameField", value="YaronTest", hidden)
       input(type="submit", name="btnSubmit", value="Create", id="btnCreateSubmit")
     ul#testje
       each discussion in allDiscussions
         a(href='/discussion/' + discussion._id) #{discussion.topic}
+    script(src='http://localhost:3000/socket.io/socket.io.js')
+    script
+      include ../../js/script.js

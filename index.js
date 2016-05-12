@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var multer = require("multer");
 var pug = require('pug');
+
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
 
 mongoose.connect('mongodb://localhost/qanda');
 
@@ -20,8 +20,19 @@ app.use('/', require('./routers/index'));
 app.use('/discussion', require('./routers/discussion'));
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+    console.log('listening on *:3000');
 });
+
 io.sockets.on('connection',function(socket){
-   console.log("connection made");
+    console.log("connection made");
+
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+
+    socket.on('chat message', function (data) {
+        socket.emit('chatback', {'hello' : 'world'});
+        console.log(data);
+    });
+
 });

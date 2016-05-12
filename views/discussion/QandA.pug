@@ -4,6 +4,8 @@ html
     style
       include ../../css/reset.css
       include ../../css/style.css
+    script(src='https://code.jquery.com/jquery-2.2.3.min.js')
+
   body
     header.myHeader
       h1= 'Live Q&A app'
@@ -13,7 +15,7 @@ html
       label(for="newQuestion", class="labelBig") Stel hier je vraag
       input(type="text", name="newQuestion", placeholder="Stel hier je vraag", class="bigInput")
       input(type="submit", name="btnSubmit", value="Vraag stellen", class="inputLeft")
-    
+
     h1= date
     each qanda in allQandAs
       h2.question #{qanda.question}
@@ -24,3 +26,6 @@ html
         input(type="text", name="questionID", hidden, value=qanda._id)
         input(type="text", name="newAnswer", placeholder="Schrijf hier je comment", class="bigInput__answer")
         input(type="submit", name="btnAnswer", value="Reageer", class="submit__answer")
+    script
+      include ../../js/script.js
+    script(src='http://localhost:3000/socket.io/socket.io.js')

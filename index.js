@@ -17,22 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 //app.use(multer); // for parsing multipart/form-data
 
 app.use('/', require('./routers/index'));
-app.use('/discussion', require('./routers/discussion'));
+app.use('/discussion', require('./routers/discussion')(io));
 
 http.listen(3000, function(){
     console.log('listening on *:3000');
-});
-
-io.sockets.on('connection',function(socket){
-    console.log("connection made");
-
-    socket.on('disconnect', function(){
-        console.log('user disconnected');
-    });
-
-    socket.on('chat message', function (data) {
-        socket.emit('chatback', {'hello' : 'world'});
-        console.log(data);
-    });
-
 });

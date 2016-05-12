@@ -8,6 +8,10 @@ var sessFail = "sess.userID does not exist / is false.";
 var sessOK = "sess.userID exists."
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+var returnRouter = function(io) {
 
 app.use(session({
   secret: 'kit kat',
@@ -77,5 +81,20 @@ router.post('/question', function(req, res){
     controller.addQuestion(req, res);
 });
 
+io.sockets.on('connection',function(socket){
+    console.log("connection made");
 
-module.exports = router;
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+
+    socket.on('chat message', function (data) {
+        socket.emit('chatback', {'hello' : 'world'});
+        console.log(data);
+    });
+
+});
+
+return router;
+}
+module.exports = returnRouter;

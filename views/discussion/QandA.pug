@@ -23,7 +23,7 @@ html
       ul(data-answers-questionID=qanda._id, class="answers")
         each answer in qanda.answers
           h3.answer #{answer.answer}
-        form(method="", action="", name="answer")
-          label(for="answerQ", class="labelBig labelBig__answer") Answer the question
-          input(type="text", data-answer-questionID=qanda._id, name="newAnswer", placeholder="Schrijf hier je comment", class="bigInput__answer")
-          input(type="submit", data-button-questionID=qanda._id, name="btnAnswer", value="Reageer", class="submit__answer")
+      form(method="", action="", name="answer")
+        label(for="answerQ", class="labelBig labelBig__answer") Answer the question
+        input(type="text", data-answer-questionID=qanda._id, name="newAnswer", placeholder="Schrijf hier je comment",class="bigInput__answer")
+        input(type="submit", data-button-questionID=qanda._id, name="btnAnswer", value="Reageer", class="submit__answer")

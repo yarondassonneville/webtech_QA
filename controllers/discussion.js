@@ -5,26 +5,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 
-function createDiscussion(req, res){
-    var sess = session;
-
-    var discussion = new Discussion({
-        topic: req.body.newDiscussion,
-        userID: sess.userID,
-        userName: sess.userName,
-        lat: req.body.locLat,
-        lng: req.body.locLng
-    });
-    discussion.save(function (err, discussion) {
-    if (err) return console.error(err);
-    console.log('succes! new discussion topic ' + discussion.topic);
-    });
-    res.send('succes');
-    //getAllDiscussions(req, res);
-};
-module.exports.createDiscussion = createDiscussion;
-
-
 function getAllDiscussions(req, res){
     Discussion.find(function(err, discussions){
         if (err) return console.error(err);
@@ -72,48 +52,60 @@ function getAllQandAs(res, req, callback) {
 }
 module.exports.getAllQandAs = getAllQandAs;
 
-
-function addQuestion(req, res){
+function createDiscussion(data, newDiscussion){
     var sess = session;
 
-    if(req.body.newQuestion){
-        var qanda = new QandA({
-        topicID: sess.getTopic,
+    var discussion = new Discussion({
+        topic: data.newDiscussion,
         userID: sess.userID,
         userName: sess.userName,
-        question: req.body.newQuestion
+        lat: data.locLat,
+        lng: data.locLng
     });
+
+    discussion.save(function (err, discussion) {
+        if (err) return console.error(err);
+        console.log('succes! new discussion topic ' + discussion.topic);
+        newDiscussion(discussion);
+    });
+};
+module.exports.createDiscussion = createDiscussion;
+
+function addQuestion(data, newQuestion){
+    var sess = session;
+
+    var qanda = new QandA({
+    topicID: sess.getTopic,
+    userID: sess.userID,
+    userName: sess.userName,
+    question: data.newQuestion
+    })
 
     qanda.save(function (err, qanda) {
-    if (err) return console.error(err);
-    console.log('succes! new question ' + qanda.question + 'for topic ' + sess.getTopic);
+        if (err) return console.error(err);
+        console.log('succes! new question ' + qanda.question + 'for topic ' + sess.getTopic);
+        newQuestion(qanda);
     });
-
-    res.redirect('/discussion/' + sess.getTopic);
-    } else {
-    res.redirect('/discussion/' + sess.getTopic);
-    }
 
 };
 module.exports.addQuestion = addQuestion;
 
-function addAnswer(req, res){
+function addAnswer(data, newAnswer){
     var sess = session;
-
-    if(req.body.newAnswer){
-        var path = req.body.questionID.replace(/"([^"]+(?="))"/g, '$1');
-        QandA.findByIdAndUpdate(
-    path,
-    {$push: {"answers": {userID: sess.userID, userName: sess.userName ,answer: req.body.newAnswer}}},
-    {safe: true, upsert: true},
-    function(err, model) {
-        console.log(err);
-    }
-);
-    console.log("added answer to /discussion/" + sess.getTopic);
-    res.redirect("/discussion/" + sess.getTopic);
-    } else {
-res.redirect("/discussion/" + sess.getTopic);
-    }
+    var path = data.questionID.replace(/"([^"]+(?="))"/g, '$1');
+    QandA.findByIdAndUpdate(
+        path,
+        {$push: {"answers": {userID: sess.userID, userName: sess.userName ,answer: data.newAnswer}}},
+        {safe: true, upsert: true},
+        function(err, model) {
+            console.log(err);
+            newData = {
+                answer: data.newAnswer,
+                qID: path
+            }
+            newAnswer(newData);
+        }
+    );
+    console.log("added answer "+ data.newAnswer +" to /discussion/" + sess.getTopic);
 }
 module.exports.addAnswer = addAnswer;

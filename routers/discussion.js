@@ -70,15 +70,18 @@ router.get('/:id', function(req, res){
   }
 });
 
+
+// router.post obsolete with sockets
+
 //router.post('/all', controller.createDiscussion);
+
+// router.post('/question', function(req, res){
+//     controller.addQuestion(req, res);
+// });
 
 router.post('/answer', function(req, res){
     console.log("Create my answer");
     controller.addAnswer(req, res);
-});
-
-router.post('/question', function(req, res){
-    controller.addQuestion(req, res);
 });
 
 io.sockets.on('connection',function(socket){
@@ -88,10 +91,31 @@ io.sockets.on('connection',function(socket){
         console.log('user disconnected');
     });
 
-    socket.on('chat message', function (data) {
-        socket.emit('chatback', {'hello' : 'world'});
-        console.log(data);
+    socket.on('client_addDiscussion', function (data) {
+      console.log(data);
+        controller.createDiscussion(data, function(newDiscussion){
+          io.emit('server_newDiscussion', newDiscussion);
+          console.log(newDiscussion);
+        });
     });
+
+    socket.on('client_addQuestion', function (data) {
+      console.log(data);
+        controller.addQuestion(data, function(newQuestion){
+          io.emit('server_newQuestion', newQuestion);
+          console.log("server: "+ newQuestion);
+        });
+    });
+
+    socket.on('client_addAnswer', function (data) {
+      console.log(data);
+        controller.addAnswer(data, function(newAnswer){
+          io.emit('server_newAnswer', newAnswer);
+          console.log("newAnswer "+newAnswer.qID+"  " + newAnswer.answer);
+        });
+    });
+
+  //
 
 });
 

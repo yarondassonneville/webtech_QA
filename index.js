@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var multer = require("multer");
 var pug = require('pug');
+
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
 
 mongoose.connect('mongodb://localhost/qanda');
 
@@ -17,11 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 //app.use(multer); // for parsing multipart/form-data
 
 app.use('/', require('./routers/index'));
-app.use('/discussion', require('./routers/discussion'));
+app.use('/discussion', require('./routers/discussion')(io));
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
-});
-io.sockets.on('connection',function(socket){
-   console.log("connection made");
+    console.log('listening on *:3000');
 });

@@ -8,6 +8,10 @@ var sessFail = "sess.userID does not exist / is false.";
 var sessOK = "sess.userID exists."
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+var returnRouter = function(io) {
 
 app.use(session({
   secret: 'kit kat',
@@ -66,20 +70,55 @@ router.get('/:id', function(req, res){
   }
 });
 
-router.post('/all', controller.createDiscussion);
+
+// router.post obsolete with sockets
+
+//router.post('/all', controller.createDiscussion);
+
+// router.post('/question', function(req, res){
+//     controller.addQuestion(req, res);
+// });
 
 router.post('/answer', function(req, res){
     console.log("Create my answer");
     controller.addAnswer(req, res);
 });
 
-router.post('/question', function(req, res){
-    controller.addQuestion(req, res);
+io.sockets.on('connection',function(socket){
+    console.log("connection made");
+
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+
+    socket.on('client_addDiscussion', function (data) {
+      console.log(data);
+        controller.createDiscussion(data, function(newDiscussion){
+          io.emit('server_newDiscussion', newDiscussion);
+          console.log(newDiscussion);
+        });
+    });
+
+    socket.on('client_addQuestion', function (data) {
+      console.log(data);
+        controller.addQuestion(data, function(newQuestion){
+          io.emit('server_newQuestion', newQuestion);
+          console.log("server: "+ newQuestion);
+        });
+    });
+
+    socket.on('client_addAnswer', function (data) {
+      console.log(data);
+        controller.addAnswer(data, function(newAnswer){
+          io.emit('server_newAnswer', newAnswer);
+          console.log("newAnswer "+newAnswer.qID+"  " + newAnswer.answer);
+        });
+    });
+
+  //
+
 });
 
-// TODO: POST -> AJAX call
-
-router.post('/create', controller.createDiscussion);
-
-
-module.exports = router;
+return router;
+}
+module.exports = returnRouter;

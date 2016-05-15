@@ -20,14 +20,22 @@ module.exports.getAllDiscussions = getAllDiscussions;
 
 function getDiscussion(req, res, pID){
     var jsonDiscussion = {};
-    Discussion.findOne({'_id': pID}, 'userName topic _id', function (err, discussion) {
+    Discussion.findOne({'_id': pID}, 'userName topic _id userID', function (err, discussion) {
         if(err){
             console.log(err);
         }
         jsonDiscussion.discussion = discussion;
         console.log(discussion);
         console.log('user %s maakte de topic -> %s aan. ID = %s', discussion.userName, discussion.topic, discussion._id);
-
+        
+        var sess = session;
+        
+        if(discussion.userID == sess.userID){
+            var myDiscussion = true;
+        } else {
+            var myDiscussion = false;
+        }
+        
         // TODO: Filter hier voor de geselecteerde discussion
         QandA.find( { 'topicID': pID }, function(err, qandas){
             if (err) return console.error(err);
@@ -35,7 +43,8 @@ function getDiscussion(req, res, pID){
             jsonDiscussion.qandas = qandas;
             res.render('discussion/QandA', {
                 topic: jsonDiscussion.discussion.topic,
-                allQandAs: jsonDiscussion.qandas
+                allQandAs: jsonDiscussion.qandas,
+                myDiscussion: myDiscussion
             });
         });
     });

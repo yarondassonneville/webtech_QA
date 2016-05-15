@@ -83,6 +83,10 @@ router.post('/answer', function(req, res){
     console.log("Create my answer");
     controller.addAnswer(req, res);
 });
+    
+router.post('/closeDiscussion', function(req, res){
+    controller.closeDiscussion(req, res);
+});
 
 io.sockets.on('connection',function(socket){
     console.log("connection made");

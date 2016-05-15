@@ -12,8 +12,7 @@ var QandASchema = mongoose.Schema({
     }],
     activeUsers: [{
         userID: String
-    }],
-    active: Boolean
+    }]
 });
 
 var QandA = mongoose.model('QandA', QandASchema);

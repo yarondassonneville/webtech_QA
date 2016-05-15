@@ -5,7 +5,8 @@ var discussionSchema = mongoose.Schema({
     userName: String,
     topic: String,
     lat: String,
-    lng: String
+    lng: String,
+    active: Boolean
 });
 
 var Discussion = mongoose.model('Discussion', discussionSchema);

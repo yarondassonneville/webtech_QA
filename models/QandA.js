@@ -10,9 +10,9 @@ var QandASchema = mongoose.Schema({
         userName: String,
         answer: String
     }],
-    activeUsers: {
+    activeUsers: [{
         userID: String
-    }
+    }]
 });
 
 var QandA = mongoose.model('QandA', QandASchema);

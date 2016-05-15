@@ -86,6 +86,14 @@ router.post('/answer', function(req, res){
     
 router.post('/closeDiscussion', function(req, res){
     controller.closeDiscussion(req, res);
+    var sess = session;
+    res.redirect("/discussion/" + sess.getTopic);
+});
+    
+router.post('/openDiscussion', function(req, res){
+    controller.openDiscussion(req, res);
+    var sess = session;
+    res.redirect("/discussion/" + sess.getTopic);
 });
 
 io.sockets.on('connection',function(socket){

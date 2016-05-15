@@ -76,7 +76,8 @@ function createDiscussion(data, newDiscussion){
         userID: sess.userID,
         userName: sess.userName,
         lat: data.locLat,
-        lng: data.locLng
+        lng: data.locLng,
+        active: true
     });
 
     discussion.save(function (err, discussion) {
@@ -139,3 +140,17 @@ function closeDiscussion(req, res){
     console.log("Discussion now false");
 }
 module.exports.closeDiscussion = closeDiscussion;
+
+function openDiscussion(req, res){
+    var sess = session;
+    Discussion.findByIdAndUpdate(
+        sess.getTopic,
+        {$set: {"active": true}},
+        {safe: true, upsert: true},
+        function(err, model) {
+            console.log(err);
+        }
+    );
+    console.log("Discussion now true");
+}
+module.exports.openDiscussion = openDiscussion;

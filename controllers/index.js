@@ -71,6 +71,7 @@ function login(req, res){
                   console.log("session.loggedin = " + session.loggedin);
                   var sess = session;
                   sess.userID = user[0]._id;
+                  sess.user = true;
                   sess.userName = req.body.usernameLog;
     if (sess.userID) {
         console.log("sess.userID exists ?");

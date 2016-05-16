@@ -23,7 +23,7 @@ app.use(session({
 // Mag maar 1 get/put/delete/etc afgaan denk ik
 router.get('/', function(req, res){
   var sess = session;
-  if (sess.userID) {
+  if (sess.user) {
     console.log(sessOK);
     res.redirect("/discussion/all");
   } else {
@@ -34,7 +34,7 @@ router.get('/', function(req, res){
 
 router.get('/all', function(req, res){
   var sess = session;
-  if (sess.userID) {
+  if (sess.user) {
     console.log(sessOK);
     controller.getAllDiscussions(req, res);
   } else {
@@ -45,7 +45,7 @@ router.get('/all', function(req, res){
 
 router.get('/create', function(req, res){
   var sess = session;
-  if (sess.userID) {
+  if (sess.user) {
     console.log(sessOK);
     return res.render('discussion/createDiscussion', {
       date: new Date().toDateString(),
@@ -59,7 +59,7 @@ router.get('/create', function(req, res){
 
 router.get('/:id', function(req, res){
   var sess = session;
-  if (sess.userID) {
+  if (sess.user) {
     console.log(sessOK);
     sess.getTopic = req.params.id;
     console.log('sess.getTopic = ' + sess.getTopic);

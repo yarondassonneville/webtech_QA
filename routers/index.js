@@ -33,6 +33,7 @@ router.get('/signup', function (req, res) {
 router.get('/logout', function (req, res) {
     var sess = session;
     sess.destroy;
+    sess.user = false;
     res.redirect('/');
 });
 

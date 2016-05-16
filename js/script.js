@@ -39,7 +39,6 @@ $(document).ready(function(){
         console.log('client: ' + newQuestion.question);
         var question = "<h2 class='question'>"+ newQuestion.question +"</h2>"
 
-        // TODO: Die add answer inputvelden enzo moeten hier ook nog geprint worden
         var answerUl = '<ul class="answers" data-answers-questionid="'+newQuestion._id+'"></ul>'
 
         var form =
@@ -67,6 +66,15 @@ $(document).ready(function(){
             $(this).prev().val("");
             return false;
         });
+
+        $(".answer").each(function(i, el){
+            var url = $(this).text();
+            if (checkURL(url)){
+                var imgHTML = "<img class'image__answer' src='"+ url +"'>";
+                $(el).append(imgHTML);
+            }
+        });
+
     }
 
     answerController();
@@ -74,7 +82,13 @@ $(document).ready(function(){
         socket.on('server_newAnswer', function(newAnswer){
             console.log('client: ' + newAnswer.answer + 'qid: ' + newAnswer.qID);
             var answer = "<h3 class='answer'>"+newAnswer.answer+"</h3>";
+            if (checkURL(newAnswer.answer)){
+                 var imgHTML = "<img class'image__answer' src='"+ newAnswer.answer +"'>";
+                 answer = answer+imgHTML;
+            }
             $("ul[data-answers-questionID='"+ newAnswer.qID +"']").append(answer);
+
+
         });
 
 
@@ -94,5 +108,11 @@ $(document).ready(function(){
     }
 
     getLocation();
+
+    function checkURL(url) {
+        var checkedURL = url.match(/\.(jpeg|jpg|gif|png)$/);
+        console.log("checkURL :" + checkedURL);
+        return checkedURL;
+    };
 
 });

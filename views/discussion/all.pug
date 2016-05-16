@@ -19,6 +19,7 @@ html
       ul#allDiscussions
         each discussion in allDiscussions
           a(href='/discussion/' + discussion._id) #{discussion.topic}
+      a.logout(href="/logout") Logout
       script(src='http://localhost:3000/socket.io/socket.io.js')
       script
         include ../../js/script.js

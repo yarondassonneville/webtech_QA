@@ -67,27 +67,31 @@ $(document).ready(function(){
             return false;
         });
 
-        $(".answer").each(function(i, el){
-            var url = $(this).text();
-            if (checkURL(url)){
-                var imgHTML = "<img class'image__answer' src='"+ url +"'>";
-                $(el).append(imgHTML);
-            }
-        });
-
     }
 
     answerController();
 
+    $(".answer").each(function(i, el){
+        var url = $(el).text();
+        if (checkURL(url)){
+            var imgHTML = "<img class'image__answer' src='"+ url +"'>";
+            console.log("el.text() = " + $(el).text() );
+            $(el).text("");
+            $(el).append(imgHTML);
+        }
+    });
+
         socket.on('server_newAnswer', function(newAnswer){
             console.log('client: ' + newAnswer.answer + 'qid: ' + newAnswer.qID);
-            var answer = "<h3 class='answer'>"+newAnswer.answer+"</h3>";
             if (checkURL(newAnswer.answer)){
-                 var imgHTML = "<img class'image__answer' src='"+ newAnswer.answer +"'>";
-                 answer = answer+imgHTML;
+                var answer = "<h3 class='answer'>";
+                var imgHTML = "<img class'image__answer' src='"+ newAnswer.answer +"'></h3>";
+                answer = answer+imgHTML;
+            }
+            else {
+                var answer = "<h3 class='answer'>"+newAnswer.answer+"</h3>";
             }
             $("ul[data-answers-questionID='"+ newAnswer.qID +"']").append(answer);
-
 
         });
 

@@ -74,7 +74,7 @@ $(document).ready(function(){
     $(".answer").each(function(i, el){
         var url = $(el).text();
         if (checkURL(url)){
-            var imgHTML = "<img class'image__answer' src='"+ url +"'>";
+            var imgHTML = "<img class='image__answer' src='"+ url +"'>";
             console.log("el.text() = " + $(el).text() );
             $(el).text("");
             $(el).append(imgHTML);

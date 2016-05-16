@@ -82,6 +82,10 @@ ul a {
 ul a:hover {
   background-color: #ededed; }
 
+ul.questions{
+  margin-left: 40px;
+}
+
 .labelBig {
   margin: 15px 15px 15px 0px;
   font-size: 1.4em; }
@@ -96,7 +100,8 @@ h2.question {
 
 h3.answer {
   font-size: 1.2em;
-  margin-left: 50px; }
+  margin: 20px 60px;
+ }
 
 h3.answer:before {
   content: '\25A0 \0020';
@@ -178,6 +183,10 @@ h1.topicName {
 
 #formNewQuestion {
   margin: 10px; }
+
+.image__answer{
+  max-width: 100%;
+}
 
 .labelBig__answer {
   margin: 15px 15px 15px 15px;

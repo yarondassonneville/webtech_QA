@@ -50,3 +50,13 @@ input[type="submit"] {
   background-image: linear-gradient(to bottom, #cc1212, #a30c0c);
   text-decoration: none;
 }
+
+.logout {
+    text-decoration: none;
+    color:black;
+    margin-left:20px;
+}
+
+.logout:hover {
+    color:#4e4e4e;
+}

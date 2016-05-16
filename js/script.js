@@ -37,35 +37,45 @@ $(document).ready(function(){
 
     socket.on('server_newQuestion', function(newQuestion){
         console.log('client: ' + newQuestion.question);
-        var question = "<h2 class='question' id='"+ newQuestion._id +"'>"+ newQuestion.question +"</h2>"
+        var question = "<h2 class='question'>"+ newQuestion.question +"</h2>"
 
         // TODO: Die add answer inputvelden enzo moeten hier ook nog geprint worden
+        var answerUl = '<ul class="answers" data-answers-questionid="'+newQuestion._id+'"></ul>'
 
-        $('.questions').append(question);
+        var form =
+        "<form method='' action='' name='answer'><label class='labelBig labelBig__answer' for='answerQ'>Answer the question</label><input class='bigInput__answer textColor' type='text' data-answer-questionid='"+newQuestion._id+"' name='newAnswer' placeholder='Schrijf hier je comment'><input class='submit__answer' type='submit' data-button-questionid='"+newQuestion._id+"' name='btnAnswer' value='Reageer'></form>"
+
+        var element = question + answerUl + form;
+        $('.questions').append(element);
+
+        answerController();
+
     });
-
 
     // ADD ANSWER
+    function answerController(){
+        $(" .submit__answer").click(function (e) {
+            console.log("answerklik");
+            var qID = $(this).attr("data-button-questionID");
+            console.log(qID);
+            var data = {
+                questionID: qID,
+                newAnswer: $("input[data-answer-questionID='"+ qID +"']").val()
+            };
+            console.log(data);
+            socket.emit('client_addAnswer', data);
+            return false;
+        });
+    }
 
-    $(" .submit__answer").click(function (e) {
-        console.log("answerklik");
-        var qID = $(this).attr("data-button-questionID");
-        console.log(qID);
-        var data = {
-            questionID: qID,
-            newAnswer: $("input[data-answer-questionID='"+ qID +"']").val()
-        };
-        console.log(data);
-        socket.emit('client_addAnswer', data);
-        return false;
-    });
+    answerController();
 
-    socket.on('server_newAnswer', function(newAnswer){
-        console.log('client: ' + newAnswer.answer + 'qid: ' + newAnswer.qID);
-        var answer = "<h3 class='answer'>"+newAnswer.answer+"</h3>";
-        var id = '"'+newAnswer.qID+'"';
-        $("ul[data-answers-questionID='"+ id +"']").append(answer);
-    });
+        socket.on('server_newAnswer', function(newAnswer){
+            console.log('client: ' + newAnswer.answer + 'qid: ' + newAnswer.qID);
+            var answer = "<h3 class='answer'>"+newAnswer.answer+"</h3>";
+            $("ul[data-answers-questionID='"+ newAnswer.qID +"']").append(answer);
+        });
+
 
     function getLocation() {
         if (navigator.geolocation) {

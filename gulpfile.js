@@ -3,6 +3,8 @@ var cleanCSS = require('gulp-clean-css');
 var concatCss = require('gulp-concat-css');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
+var concat = require('gulp-concat');
+var gulpPugBeautify = require('gulp-pug-beautify');
 
 gulp.task('minify-css', function() {
   return gulp.src('css/*.css')
@@ -23,4 +25,11 @@ gulp.task('image', () => {
 			use: [pngquant()]
 		}))
 		.pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('scripts', function() {
+  gulp.src(['./js/script.js'])
+    .pipe(concat('all.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./js/'))
 });

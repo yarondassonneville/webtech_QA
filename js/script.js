@@ -1,7 +1,6 @@
 $(document).ready(function(){
     var socket = io.connect('http://localhost:3000');
 
-
     // CLIENT SOCKET CONTROLLERS
 
     // NEW DISCUSSION
@@ -32,6 +31,7 @@ $(document).ready(function(){
             newQuestion: $('#addQuestion').val()
         };
         socket.emit('client_addQuestion', data);
+        $(this).prev().val("");
         return false;
     });
 
@@ -54,7 +54,7 @@ $(document).ready(function(){
 
     // ADD ANSWER
     function answerController(){
-        $(" .submit__answer").click(function (e) {
+        $(".submit__answer").click(function (e) {
             console.log("answerklik");
             var qID = $(this).attr("data-button-questionID");
             console.log(qID);
@@ -64,6 +64,7 @@ $(document).ready(function(){
             };
             console.log(data);
             socket.emit('client_addAnswer', data);
+            $(this).prev().val("");
             return false;
         });
     }

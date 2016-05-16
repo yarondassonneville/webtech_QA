@@ -99,16 +99,13 @@ h3.answer:before {
 h1.topicName {
   margin: 10px;
   font-size: 1.6em;
-  font-weight: bold; }
+  font-weight: bold;
+  margin: 20px 0px;
+  width: 300px; }
 
 .imageBack {
-  background-image: url(https://images.unsplash.com/photo-1458891216473-4f26bb4eb40e?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450);
+  background-image: url(https://images.unsplash.com/photo-1435686858161-59da32dfd4b4?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450);
   background-size: cover; }
-
-.qandaContainer{
-  width: 90%;
-  margin: auto;
-}
 
 .myContainer {
   display: flex;
@@ -156,13 +153,12 @@ h1.topicName {
     justify-content: center; }
 
   .myContainer {
-    display: flex; }
-  }
+    display: flex; } }
 .bigInput {
   color: white;
   padding: 10px;
   font-size: 1.1em;
-  margin: 0px 20px;
+  margin: 0px 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px; }
 
@@ -185,7 +181,6 @@ h1.topicName {
   font-size: 1em;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-  margin: 20px 0px;
   width: 300px; }
 
 .inputLeft {
@@ -193,6 +188,9 @@ h1.topicName {
 
 .textColor {
   color: black; }
+
+.qandaContainer {
+  margin: 0px 20px; }
 
 header {
   width: 100%;

@@ -30,6 +30,12 @@ router.get('/signup', function (req, res) {
     res.redirect('/');
 });
 
+router.get('/logout', function (req, res) {
+    var sess = session;
+    sess.destroy;
+    res.redirect('/');
+});
+
 router.post('/signup', controller.create);
 
 router.post('/', controller.login);

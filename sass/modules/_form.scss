@@ -60,3 +60,45 @@
         display:flex;}
     
 }
+
+.bigInput {
+    color: white;
+    padding: 10px;
+    font-size: 1.1em;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#formNewDiscussion {
+    margin:10px;
+}
+
+#btnCreateSubmit {
+    margin-left:10px;
+}
+
+#formNewQuestion {
+    margin:10px;
+}
+
+.labelBig__answer {
+    margin:15px 15px 15px 15px;
+    font-size:1.1em;
+}
+
+.bigInput__answer {
+    color: white;
+    padding: 5px;
+    font-size: 1em;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width:300px;
+}
+
+.inputLeft {
+    margin-left:10px;
+}
+
+.textColor {
+    color:black;
+}

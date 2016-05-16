@@ -17,6 +17,14 @@
     "multer": "^1.1.0",
     "nodemon": "^1.9.1",
     "password-hash": "^1.2.2",
-    "sessionstorage": "0.0.1"
+    "pug": "^2.0.0-alpha6",
+    "sessionstorage": "0.0.1",
+    "socket.io": "^1.4.6"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.6",
+    "gulp-concat-css": "^2.2.0",
+    "gulp-imagemin": "^2.4.0"
   }
 }
